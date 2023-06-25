@@ -1,0 +1,68 @@
+class Plant:
+    def __init__(self, name, growth_conditions):
+        self.name = name
+        self.growth_conditions = growth_conditions
+        self.is_grown = False
+
+    def grow(self, conditions):
+        if conditions == self.growth_conditions:
+            self.is_grown = True
+
+class Potion:
+    def __init__(self, name, ingredients):
+        self.name = name
+        self.ingredients = ingredients
+
+class Garden:
+    def __init__(self):
+        self.plants = []
+        self.potions = []
+
+    def add_plant(self, plant):
+        self.plants.append(plant)
+
+    def add_potion(self, potion):
+        self.potions.append(potion)
+
+    def grow_plant(self, plant_name, growth_conditions):
+        for plant in self.plants:
+            if plant.name == plant_name:
+                plant.grow(growth_conditions)
+                break
+
+    def create_potion(self, potion_name, required_ingredients):
+        for potion in self.potions:
+            if potion.name == potion_name:
+                if set(required_ingredients).issubset(potion.ingredients):
+                    print("Potion created:", potion_name)
+                    break
+        else:
+            print("Potion creation failed.")
+
+# Create plants
+rose = Plant("Rose", ["Sunlight", "Water"])
+daisy = Plant("Daisy", ["Shade", "Water"])
+tulip = Plant("Tulip", ["Sunlight", "Fertilizer"])
+
+# Create potions
+potion1 = Potion("Love Potion", ["Rose"])
+potion2 = Potion("Health Potion", ["Daisy", "Water"])
+potion3 = Potion("Energy Potion", ["Tulip", "Sunlight", "Water"])
+
+# Create garden
+garden = Garden()
+garden.add_plant(rose)
+garden.add_plant(daisy)
+garden.add_plant(tulip)
+garden.add_potion(potion1)
+garden.add_potion(potion2)
+garden.add_potion(potion3)
+
+# Simulate gameplay
+garden.grow_plant("Rose", ["Sunlight", "Water"])
+garden.grow_plant("Daisy", ["Shade", "Water"])
+garden.grow_plant("Tulip", ["Sunlight", "Fertilizer"])
+
+garden.create_potion("Love Potion", ["Rose"])
+garden.create_potion("Health Potion", ["Daisy", "Water"])
+garden.create_potion("Energy Potion", ["Tulip", "Sunlight", "Water"])
